@@ -1,24 +1,25 @@
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Projekt_js.Server.Controllers
 {
+	[Route("api/[controller]")]
 	[ApiController]
-	[Route("[controller]")]
-	public class WeatherForecastController : ControllerBase
+	public class Data2Controller : ControllerBase
 	{
 		private static readonly string[] Summaries = new[]
 		{
 			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 		};
 
-		private readonly ILogger<WeatherForecastController> _logger;
+		private readonly ILogger<Data2Controller> _logger;
 
-		public WeatherForecastController(ILogger<WeatherForecastController> logger)
+		public Data2Controller(ILogger<Data2Controller> logger)
 		{
 			_logger = logger;
 		}
 
-		[HttpGet(Name = "GetWeatherForecast")]
+		[HttpGet(Name = "Data2")]
 		public IEnumerable<WeatherForecast> Get()
 		{
 			return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -29,5 +30,6 @@ namespace Projekt_js.Server.Controllers
 			})
 			.ToArray();
 		}
+		
 	}
 }
