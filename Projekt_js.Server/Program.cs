@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Projekt_js.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

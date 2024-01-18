@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Projekt_js.Server.Models
 {
-	public class MyDbContext:DbContext
+	public class MyDbContext : DbContext
 	{
 		public MyDbContext(DbContextOptions<MyDbContext> options)
 		: base(options)
