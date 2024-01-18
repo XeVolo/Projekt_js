@@ -51,6 +51,11 @@ export default defineConfig({
                 target: 'http://localhost:5240',
                 secure: false
             },
+            '^/api/Announcement': {
+                target: 'http://localhost:5240',
+                secure: false
+            },
+
             '^/weatherforecast': {
                 target: 'http://localhost:5240',
                 secure: false
