@@ -1,4 +1,4 @@
-﻿#root {
+#root {
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
@@ -6,16 +6,20 @@
 }
 
 tr:nth-child(even) {
-    background: #F2F2F2;
+    background: #FF0000;
 }
 
 tr:nth-child(odd) {
-    background: #FFF;
+    background: #FF0000;
 }
 
 th, td {
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+h2 {
+    color: blue;
 }
 
 p {
