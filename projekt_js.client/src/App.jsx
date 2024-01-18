@@ -37,7 +37,7 @@ function App() {
                             {announcements.map(announcement =>
                                 <li key={announcement.id}>
                                     <Link
-                                        to={`/api/Announcement/${announcement.id}`}
+                                        to={`/api/Announcements/${announcement.id}`}
                                         onClick={() => handleAnnouncementClick(announcement)}
                                     >
                                         <h3>{announcement.name}</h3>
@@ -67,7 +67,7 @@ function App() {
     );
 
     async function populateAnnouncementData() {
-        const response = await fetch('api/Announcement');
+        const response = await fetch('api/Announcements');
         const data = await response.json();
         setAnnouncements(data);
     }

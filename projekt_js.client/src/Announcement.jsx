@@ -14,7 +14,7 @@ const Announcement = ({ announcement }) => {
             <p>State: {announcement.state}</p>
 
             {/* Przycisk powrotu do listy og³oszeñ */}
-            <Link to="/api/Announcement">Back to Announcements</Link>
+            <Link to="/api/Announcements">Back to Announcements</Link>
         </div>
     );
 };
