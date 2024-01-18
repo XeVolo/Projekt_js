@@ -1,11 +1,12 @@
 using Microsoft.Extensions.Configuration;
-using Projekt_js.Server.Models;
 using Microsoft.EntityFrameworkCore;
+using Projekt_js.Server;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,7 +29,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
-
+app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projekt_js.Server", "Projek
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "projekt_js.client", "projekt_js.client\projekt_js.client.esproj", "{C28CF154-DE1A-40B4-8093-A26D67C4468C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{75845C4B-1890-48E7-8299-8A91D2BA37B8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,10 +23,6 @@ Global
 		{C28CF154-DE1A-40B4-8093-A26D67C4468C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C28CF154-DE1A-40B4-8093-A26D67C4468C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C28CF154-DE1A-40B4-8093-A26D67C4468C}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{75845C4B-1890-48E7-8299-8A91D2BA37B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75845C4B-1890-48E7-8299-8A91D2BA37B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75845C4B-1890-48E7-8299-8A91D2BA37B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75845C4B-1890-48E7-8299-8A91D2BA37B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
