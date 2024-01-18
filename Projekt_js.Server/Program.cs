@@ -1,6 +1,7 @@
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Projekt_js.Server;
+using Projekt_js.Server.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,12 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+};
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
