@@ -11,7 +11,6 @@ namespace Projekt_js.Server.Models
 		public double TotalPrice { get; set; }
 		public string ClientId { get; set; }
 		public string Status { get; set; }
-		[ForeignKey("ClientId")]
 		public virtual Client Client { get; set; }
 		public virtual ICollection<Product> Products { get; set; }
 	}
