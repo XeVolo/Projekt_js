@@ -12,7 +12,8 @@ namespace Projekt_js.Server.Entities
 	{
 		public int Id { get; set; }
 		public int ClientId { get; set; }
-		public virtual ICollection<Announcement> Announcements { get; set; }
+		public virtual ICollection<OrderConnector> OrderConnectors { get; set; }
+		public DateTime Date { get; set; }
 		public int SummaryPrice { get; set; }
 		public virtual Client Client { get; set; }
 	}
