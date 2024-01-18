@@ -14,7 +14,6 @@ namespace Projekt_js.Server.Models
 		[DataType(DataType.Date)]
 		public DateTime Date { get; set; }
 
-
 		[ForeignKey("SellerId")]
 		public virtual Client Seller { get; set; }
 		[ForeignKey("ProductId")]
