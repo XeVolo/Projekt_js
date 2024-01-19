@@ -52,7 +52,6 @@ namespace Projekt_js.Server.Controllers
                 return BadRequest("Brak zaznaczonych kategorii.");
             }
 
-            // Znajdź ogłoszenia przypisane do wybranych kategorii
             var announcementsInCategories = await _context.CategoryConnectors
                 .Where(cc => categoryIds.Contains(cc.SubCategoryId))
                 .Select(cc => cc.Announcement)
