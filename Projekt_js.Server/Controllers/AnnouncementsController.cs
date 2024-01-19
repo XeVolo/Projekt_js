@@ -26,7 +26,7 @@ namespace Projekt_js.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Announcement>>> GetAnnouncements()
         {
-            return await _context.Announcements.Include(s=>s.OrderConnectors).Include(s => s.CategoryConnectors).ToListAsync();
+            return await _context.Announcements.Include(s => s.CategoryConnectors).ToListAsync();
         }
 
         // GET: api/Announcements/5
