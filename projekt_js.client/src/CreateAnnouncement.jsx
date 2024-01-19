@@ -1,5 +1,5 @@
 ﻿/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CreateAnnouncement.css';
 
@@ -11,20 +11,15 @@ const CreateAnnouncement = () => {
         price: 0,
         description: '',
         condition: '',
-        
         state: '',
-         // Początkowo pusta lista kategorii
     });
     const [nameError, setNameError] = useState('');
+    const [subcategories, setSubcategories] = useState([]);
+    const [selectedSubcategories, setSelectedSubcategories] = useState([]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setAnnouncementData({ ...announcementData, [name]: value });
-    };
-
-    const handleCategoryChange = (e) => {
-        const selectedCategories = Array.from(e.target.selectedOptions, (option) => option.value);
-        setAnnouncementData({ ...announcementData, categoryConnectors: selectedCategories });
     };
 
     const validateForm = () => {
@@ -35,6 +30,30 @@ const CreateAnnouncement = () => {
         setNameError('');
         return true;
     };
+
+    const fetchSubcategories = async () => {
+        try {
+            const response = await fetch('api/SubCategory');
+
+            
+                const data = await response.json();
+                setSubcategories(data);
+            
+             
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    console.log(subcategories);
+    {
+        subcategories.map(subcategory => (
+            <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
+        ))
+    }
+
+    useEffect(() => {
+        fetchSubcategories();
+    }, []); // Fetch subcategories when the component mounts
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,7 +68,7 @@ const CreateAnnouncement = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(announcementData),
+                body: JSON.stringify({ ...announcementData, categoryConnectors: selectedSubcategories }),
             });
 
             if (response.ok) {
@@ -73,13 +92,12 @@ const CreateAnnouncement = () => {
                 <input type="text" name="name" value={announcementData.name} onChange={handleInputChange} />
                 <span style={{ color: 'red' }}>{nameError}</span>
 
-                {/* Lista rozwijana z checkboxami dla kategorii */}
-                <label htmlFor="category">Select Categories:</label>
-                <select multiple onChange={handleCategoryChange} value={announcementData.categoryConnectors}>
-                    {/* Wstaw kategorie z backendu lub zdefiniuj stałe */}
-                    <option value="1">Electronics</option>
-                    <option value="2">Furniture</option>
-                    {/* ... dodaj więcej opcji według potrzeb */}
+                {/* Lista rozwijana z checkboxami dla subkategorii */}
+                <label htmlFor="subcategories">Select Subcategories:</label>
+                <select multiple onChange={(e) => setSelectedSubcategories(Array.from(e.target.selectedOptions, (option) => option.value))} value={selectedSubcategories}>
+                    {subcategories.map(subcategory => (
+                        <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
+                    ))}
                 </select>
 
                 <label htmlFor="quantity">Quantity:</label>
@@ -94,12 +112,8 @@ const CreateAnnouncement = () => {
                 <label htmlFor="condition">Condition:</label>
                 <input type="text" name="condition" value={announcementData.condition} onChange={handleInputChange} />
 
-                
-
                 <label htmlFor="state">State:</label>
                 <input type="text" name="state" value={announcementData.state} onChange={handleInputChange} />
-
-                
 
                 <button type="submit">Submit Announcement</button>
             </form>
