@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Announcement from './Announcement';
+import CreateAnnouncement from './CreateAnnouncement';
+import CreateAnnouncementButton from './CreateAnnouncementButton'; // Import nowego komponentu
 import './App.css';
 
 function App() {
@@ -60,7 +62,12 @@ function App() {
         <Router>
             <div>
                 <h1 id="tabelLabel">Advertisement Board</h1>
+                <CreateAnnouncementButton /> {/* Dodaj przycisk Create Announcement */}
                 <p>This component demonstrates fetching announcement data from the server.</p>
+
+                <Routes>
+                    <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
+                </Routes>
 
                 {contents}
             </div>
