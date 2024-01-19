@@ -26,7 +26,7 @@ namespace Projekt_js.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubCategory>>> GetSubCategories()
         {
-            return await _context.SubCategories.ToListAsync();
+            return Ok(await _context.SubCategories.ToListAsync());
         }
 
         // GET: api/SubCategory/5
@@ -52,7 +52,7 @@ namespace Projekt_js.Server.Controllers
             _context.SubCategories.Add(subCategory);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSubCategory", new { id = subCategory.Id }, subCategory);
+            return Ok();
         }
 
         // DELETE: api/SubCategory/5
