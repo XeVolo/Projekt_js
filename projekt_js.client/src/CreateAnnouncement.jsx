@@ -34,9 +34,7 @@ const CreateAnnouncement = () => {
     const fetchSubcategories = async () => {
         try {
             const response = await fetch('api/SubCategory');
-
-            
-                const data = await response.json();
+            const data = await response.json();
                 setSubcategories(data);
             
              

@@ -22,8 +22,6 @@ public class MyDbContext : DbContext
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<OrderConnector> OrderConnectors { get; set; }
 	public DbSet<SubCategory> SubCategories { get; set; }
-    public DbSet<Projekt_js.Server.Models.AnnouncementModel> AnnouncementModel { get; set; } = default!;
-
 
 }
 

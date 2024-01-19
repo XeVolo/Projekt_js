@@ -26,7 +26,7 @@ namespace Projekt_js.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Announcement>>> GetAnnouncements()
         {
-            return await _context.Announcements.Include(s => s.CategoryConnectors).ToListAsync();
+            return await _context.Announcements.ToListAsync();
         }
 
         // GET: api/Announcements/5
@@ -85,9 +85,9 @@ namespace Projekt_js.Server.Controllers
             foreach(int item in announcementModel.CategoryConnectors)
             {
                 var query = _context.SubCategories.Find(item);
-                CategoryConnector connector = new CategoryConnector { AnnoucementId = announcement.Id, SubCategoryId = query.Id };
+                CategoryConnector connector = new CategoryConnector { AnnouncementId = announcement.Id, SubCategoryId = query.Id };
 				_context.CategoryConnectors.Add(connector);
-				await _context.SaveChangesAsync();
+				_context.SaveChanges();
 			}
 
             return Ok();
