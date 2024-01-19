@@ -82,6 +82,13 @@ namespace Projekt_js.Server.Controllers
 			Announcement announcement = new Announcement { Name = announcementModel.Name, Quantity = announcementModel.Quantity, Price = announcementModel.Price, Date = DateTime.Now, Description = announcementModel.Description, Condition = announcementModel.Condition, State = "Aktywne" };
 			_context.Announcements.Add(announcement);
 			await _context.SaveChangesAsync();
+            foreach(int item in announcementModel.CategoryConnectors)
+            {
+                var query = _context.SubCategories.Find(item);
+                CategoryConnector connector = new CategoryConnector { AnnoucementId = announcement.Id, SubCategoryId = query.Id };
+				_context.CategoryConnectors.Add(connector);
+				await _context.SaveChangesAsync();
+			}
 
 			return CreatedAtAction("GetAnnouncement", new { id = announcement.Id }, announcement);
 		}
