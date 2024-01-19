@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt_js.Server;
 using Projekt_js.Server.Entities;
+using Projekt_js.Server.Models;
 
 namespace Projekt_js.Server.Controllers
 {
@@ -76,8 +77,9 @@ namespace Projekt_js.Server.Controllers
         // POST: api/Category
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<CategoryModel>> PostCategory(CategoryModel categorymodel)
         {
+            Category category = new Category { Name=categorymodel.Name };
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt_js.Server;
 using Projekt_js.Server.Entities;
+using Projekt_js.Server.Models;
 
 namespace Projekt_js.Server.Controllers
 {
@@ -76,8 +77,10 @@ namespace Projekt_js.Server.Controllers
         // POST: api/SubCategory
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<SubCategory>> PostSubCategory(SubCategory subCategory)
+        public async Task<ActionResult<SubCategoryModel>> PostSubCategory(SubCategoryModel subCategorymodel)
         {
+            var query = _context.Categories.Find(subCategorymodel.CategoryId);
+            SubCategory subCategory = new SubCategory { CategoryId = query.Id, Name = subCategorymodel.Name };
             _context.SubCategories.Add(subCategory);
             await _context.SaveChangesAsync();
 
