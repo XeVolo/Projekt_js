@@ -43,6 +43,29 @@ namespace Projekt_js.Server.Controllers
             return announcement;
         }
 
+        [HttpPost]
+        [Route("SearchByCategories")]
+        public async Task<ActionResult<IEnumerable<Announcement>>> GetAnnouncementsByCategories([FromBody] List<int> categoryIds)
+        {
+            if (categoryIds == null || categoryIds.Count == 0)
+            {
+                return BadRequest("Brak zaznaczonych kategorii.");
+            }
+
+            // Znajdź ogłoszenia przypisane do wybranych kategorii
+            var announcementsInCategories = await _context.CategoryConnectors
+                .Where(cc => categoryIds.Contains(cc.SubCategoryId))
+                .Select(cc => cc.Announcement)
+                .ToListAsync();
+
+            if (announcementsInCategories == null || announcementsInCategories.Count == 0)
+            {
+                return NotFound("Brak ogłoszeń w wybranych kategoriach.");
+            }
+
+            return announcementsInCategories;
+        }
+
         // PUT: api/Announcements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
