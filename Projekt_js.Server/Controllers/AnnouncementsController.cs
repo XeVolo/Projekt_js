@@ -90,7 +90,7 @@ namespace Projekt_js.Server.Controllers
 				await _context.SaveChangesAsync();
 			}
 
-			return CreatedAtAction("GetAnnouncement", new { id = announcement.Id }, announcement);
+            return Ok();
 		}
 
 		// DELETE: api/Announcements/5
