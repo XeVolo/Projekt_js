@@ -139,17 +139,17 @@ function App() {
                 <CartButton />
 
                 {announcements === undefined ? (
-                    <p><em>£adowanie produktów</em></p>
+                    <p><em>Ladowanie produktow</em></p>
                 ) : (
                     <div className="annoucement-container">
                             {selectedAnnouncement ? (
                                 <div>
                                     <Announcement announcement={selectedAnnouncement} />
-                                    <button onClick={() => setSelectedAnnouncement(null)}>Back to Announcements</button>
+                                    <button onClick={() => setSelectedAnnouncement(null)}>Cofnij do strony glownej</button>
                                 </div>
                             ) : (
                                 <div>
-                                    <h2>Produkty</h2>
+                                    <h2>Nasze produkty</h2>
 
                                         <ul className="announcement-list">
                                         {getSortedAnnouncements().map(announcement => (
@@ -174,7 +174,7 @@ function App() {
                     )}
             </div>
             <footer>
-                <p>&copy; 2024 Lumpeks pumpeks. Wszelkie prawa zastrze¿one.</p>
+                <p>&copy; 2024 Lumpeks pumpeks. Wszelkie prawa zastrzezone.</p>
             </footer>
             </Router>
         );

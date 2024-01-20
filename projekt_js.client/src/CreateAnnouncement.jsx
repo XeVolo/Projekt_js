@@ -13,6 +13,7 @@ const CreateAnnouncement = () => {
         description: '',
         condition: '',
         state: '',
+        photoURL: '',
     });
     const [nameError, setNameError] = useState('');
     const [subcategories, setSubcategories] = useState([]);
@@ -108,6 +109,9 @@ const CreateAnnouncement = () => {
 
                 <label htmlFor="state">State:</label>
                 <input type="text" name="state" value={announcementData.state} onChange={handleInputChange} />
+
+                <label htmlFor="photoURL">Photo URL:</label>
+                <input type="text" name="photoURL" value={announcementData.photoURL} onChange={handleInputChange} />
 
                 <button type="submit">Submit Announcement</button>
             </form>
