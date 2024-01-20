@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const Cart = ({ cartItems, announcements }) => {
     // Funkcja do zsumowania cen og³oszeñ w koszyku
     const calculateTotalPrice = () => {
@@ -11,7 +14,7 @@ const Cart = ({ cartItems, announcements }) => {
         <div>
             <h2>Koszyk</h2>
             {cartItems.length === 0 ? (
-                <p>Twoj koszyk jest pusty.</p>
+                <p>Twój koszyk jest pusty.</p>
             ) : (
                 <div>
                     <ul>
@@ -32,6 +35,9 @@ const Cart = ({ cartItems, announcements }) => {
                         })}
                     </ul>
                     <p>Suma cen: {calculateTotalPrice()} PLN</p>
+                    <Link to="/Order">
+                        <button>Z³ó¿ zamówienie</button>
+                    </Link>
                 </div>
             )}
         </div>

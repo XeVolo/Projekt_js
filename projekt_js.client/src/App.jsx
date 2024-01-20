@@ -6,6 +6,7 @@ import CreateAnnouncement from './CreateAnnouncement';
 import CreateAnnouncementButton from './CreateAnnouncementButton';
 import './App.css';
 import Cart from './Cart';
+import Order from './Order';
 
 function CartButton() {
     return (
@@ -112,9 +113,10 @@ function App() {
                 <Routes>
                     <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
                     <Route
-                        path="/cart"
+                        path="/Cart"
                         element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}
                     />
+                    <Route path="/Order" element={<Order />} />
                 </Routes>
 
                 <CartButton />
