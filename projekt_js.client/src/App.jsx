@@ -160,11 +160,11 @@ function App() {
                                                 >
                                                     <h3>{announcement.name}</h3>
                                                 </Link>
-                                                <p>Description: {announcement.description}</p>
-                                                <p>Condition: {announcement.condition}</p>
-                                                <p>Price: {announcement.price}</p>
-                                                <p>Date: {announcement.date}</p>
-                                                <p>State: {announcement.state}</p>
+                                                <p>Zdjecie: {announcement.photoURL}</p>
+                                                <p>Opis: {announcement.description}</p>
+                                                <p>Stan: {announcement.condition}</p>
+                                                <p>Cena: {announcement.price}zl</p>
+                                                <p>Data: {announcement.date}</p>
                                             </li>
                                         ))}
                                     </ul>

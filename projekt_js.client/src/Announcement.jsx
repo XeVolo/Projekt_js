@@ -7,16 +7,13 @@ import './Announcement.css';
 const Announcement = ({ announcement }) => {
     return (
         <div>
-            <h2>Announcement Details</h2>
-            <p>Name: {announcement.name}</p>
-            <p>Description: {announcement.description}</p>
-            <p>Condition: {announcement.condition}</p>
-            <p>Price: {announcement.price}</p>
-            <p>Date: {announcement.date}</p>
-            <p>State: {announcement.state}</p>
+            <h2>{announcement.name}</h2>
+            <p>Zdjêcie: {announcement.photoURL}</p>
+            <p>Opis produktu: {announcement.description}</p>
+            <p>Stan: {announcement.condition}</p>
+            <p>Cena: {announcement.price}</p>
+            <p>Data dodania: {announcement.date}</p>
 
-            {/* Przycisk powrotu do listy og³oszeñ */}
-            <Link to="/api/Announcements">Back to Announcements</Link>
         </div>
     );
 };
