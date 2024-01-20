@@ -1,9 +1,20 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Announcement from './Announcement';
 import CreateAnnouncement from './CreateAnnouncement';
 import CreateAnnouncementButton from './CreateAnnouncementButton';
 import './App.css';
+import Cart from './Cart';
+import Order from './Order';
+
+function CartButton() {
+    return (
+        <Link to="/cart">
+            <button>Przejdz do koszyka</button>
+        </Link>
+    );
+}
 
 function App() {
     const [announcements, setAnnouncements] = useState([]);
@@ -11,6 +22,7 @@ function App() {
     const [sortByPrice, setSortByPrice] = useState(null);
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
     const [subcategories, setSubcategories] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         // Pobierz og³oszenia
@@ -25,12 +37,12 @@ function App() {
     };
 
     const handleClearSubcategories = () => {
-        setSelectedSubcategories([]);
+        populateAnnouncementData();
     };
 
     const handleFilterBySubcategories = async () => {
         try {
-            const response = await fetch('api/Announcements/SearchByCategories', {   
+            const response = await fetch('api/Announcements/SearchByCategories', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,6 +55,10 @@ function App() {
         } catch (error) {
             console.error('B³¹d podczas filtrowania po podkategorii', error);
         }
+    };
+
+    const handleAddToCart = (announcement) => {
+        setCartItems([...cartItems, announcement.id]);
     };
 
     const populateAnnouncementData = async () => {
@@ -113,8 +129,15 @@ function App() {
 
                 <Routes>
                     <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
+                    <Route
+                        path="/Cart"
+                        element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}
+                    />
+                    <Route path="/Order" element={<Order />} />
                 </Routes>
-                
+
+                <CartButton />
+
                 {announcements === undefined ? (
                     <p><em>£adowanie produktów</em></p>
                 ) : (
@@ -157,4 +180,4 @@ function App() {
         );
     }
 
-    export default App;
+export { App as default, CartButton };
