@@ -77,31 +77,48 @@ function App() {
 
     return (
         <Router>
-            <div>
-                <h1 id="tabelLabel">Advertisement Board</h1>
+            <header>
+                <h1 id="StoreName">Lumpeks pumpeks</h1>
+            </header>
+            <div>                            
                 <CreateAnnouncementButton />
-                <p>This component demonstrates fetching announcement data from the server.</p>
+                <div className="grid-container">
+                    <div className="narrow-column subcategory-container">
+                        <h2>Kategorie</h2>
+                        <select id="subcategorySelect" multiple value={selectedSubcategories} onChange={handleSubcategoryInputChange}>
+                            {subcategories.map(subcategory => (
+                                <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
+                            ))}
+                        </select>
+                        <div className="button-container">
+                            <button onClick={handleFilterBySubcategories}>Filtruj</button>
+                            <button onClick={handleClearSubcategories}>Wyczysc filtry</button>
+                        </div>
+                    </div>
 
-                <label>
-                    Wybierz podkategorie:
-                    <select multiple value={selectedSubcategories} onChange={handleSubcategoryInputChange}>
-                        {subcategories.map(subcategory => (
-                            <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
-                        ))}
-                    </select>
-                </label>
+                    <div className="regular-column subcategory-container">
+                        {/* Kolumna 2 - Analogiczny kod jak dla pierwszej kolumny */}
+                    </div>
 
-                <button onClick={handleFilterBySubcategories}>Filtruj po podkategorii</button>
-                <button onClick={handleClearSubcategories}>Wyczyœæ podkategorie</button>
+                    <div className="narrow-column subcategory-container">
+                        <h2>Sortowanie</h2>
+                        <div className="button-container">
+                            <button onClick={() => setSortByPrice('asc')}>Sortuj od najnizszej ceny</button>
+                            <button onClick={() => setSortByPrice('desc')}>Sortuj od najwyzszej ceny</button>
+                            <button onClick={() => setSortByPrice(null)}>Wyczysc sortowanie</button>
+                        </div>
+                    </div>
+
+                </div>                     
 
                 <Routes>
                     <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
                 </Routes>
-
+                
                 {announcements === undefined ? (
-                    <p><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
+                    <p><em>£adowanie produktów</em></p>
                 ) : (
-                        <div>
+                    <div className="annoucement-container">
                             {selectedAnnouncement ? (
                                 <div>
                                     <Announcement announcement={selectedAnnouncement} />
@@ -109,13 +126,9 @@ function App() {
                                 </div>
                             ) : (
                                 <div>
-                                    <h2>Announcements</h2>
-                                    <div>
-                                        <button onClick={() => setSortByPrice('asc')}>Sortuj od najnizszej ceny</button>
-                                        <button onClick={() => setSortByPrice('desc')}>Sortuj od najwyzszej ceny</button>
-                                        <button onClick={() => setSortByPrice(null)}>Wyczysc sortowanie</button>
-                                    </div>
-                                    <ul>
+                                    <h2>Produkty</h2>
+
+                                        <ul className="announcement-list">
                                         {getSortedAnnouncements().map(announcement => (
                                             <li key={announcement.id}>
                                                 <Link
@@ -136,7 +149,10 @@ function App() {
                             )}
                         </div>
                     )}
-                </div>
+            </div>
+            <footer>
+                <p>&copy; 2024 Lumpeks pumpeks. Wszelkie prawa zastrze¿one.</p>
+            </footer>
             </Router>
         );
     }
