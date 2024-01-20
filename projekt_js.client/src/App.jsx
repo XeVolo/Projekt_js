@@ -4,6 +4,15 @@ import Announcement from './Announcement';
 import CreateAnnouncement from './CreateAnnouncement';
 import CreateAnnouncementButton from './CreateAnnouncementButton';
 import './App.css';
+import Cart from './Cart';
+
+function CartButton() {
+    return (
+        <Link to="/cart">
+            <button>Przejdz do koszyka</button>
+        </Link>
+    );
+}
 
 function App() {
     const [announcements, setAnnouncements] = useState([]);
@@ -11,6 +20,7 @@ function App() {
     const [sortByPrice, setSortByPrice] = useState(null);
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
     const [subcategories, setSubcategories] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         // Pobierz og³oszenia
@@ -25,12 +35,12 @@ function App() {
     };
 
     const handleClearSubcategories = () => {
-        setSelectedSubcategories([]);
+        populateAnnouncementData();
     };
 
     const handleFilterBySubcategories = async () => {
         try {
-            const response = await fetch('api/Announcements/SearchByCategories', {   
+            const response = await fetch('api/Announcements/SearchByCategories', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,6 +53,10 @@ function App() {
         } catch (error) {
             console.error('B³¹d podczas filtrowania po podkategorii', error);
         }
+    };
+
+    const handleAddToCart = (announcement) => {
+        setCartItems([...cartItems, announcement.id]);
     };
 
     const populateAnnouncementData = async () => {
@@ -92,53 +106,60 @@ function App() {
                 </label>
 
                 <button onClick={handleFilterBySubcategories}>Filtruj po podkategorii</button>
-                <button onClick={handleClearSubcategories}>Wyczyœæ podkategorie</button>
+                <button onClick={handleClearSubcategories}>Wyczysc podkategorie</button>
 
                 <Routes>
                     <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
+                    <Route
+                        path="/cart"
+                        element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}
+                    />
                 </Routes>
+
+                <CartButton />
 
                 {announcements === undefined ? (
                     <p><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
                 ) : (
-                        <div>
-                            {selectedAnnouncement ? (
+                    <div>
+                        {selectedAnnouncement ? (
+                            <div>
+                                <Announcement announcement={selectedAnnouncement} />
+                                <button onClick={() => setSelectedAnnouncement(null)}>Back to Announcements</button>
+                            </div>
+                        ) : (
+                            <div>
+                                <h2>Announcements</h2>
                                 <div>
-                                    <Announcement announcement={selectedAnnouncement} />
-                                    <button onClick={() => setSelectedAnnouncement(null)}>Back to Announcements</button>
+                                    <button onClick={() => setSortByPrice('asc')}>Sortuj od najnizszej ceny</button>
+                                    <button onClick={() => setSortByPrice('desc')}>Sortuj od najwyzszej ceny</button>
+                                    <button onClick={() => setSortByPrice(null)}>Wyczysc sortowanie</button>
                                 </div>
-                            ) : (
-                                <div>
-                                    <h2>Announcements</h2>
-                                    <div>
-                                        <button onClick={() => setSortByPrice('asc')}>Sortuj od najnizszej ceny</button>
-                                        <button onClick={() => setSortByPrice('desc')}>Sortuj od najwyzszej ceny</button>
-                                        <button onClick={() => setSortByPrice(null)}>Wyczysc sortowanie</button>
-                                    </div>
-                                    <ul>
-                                        {getSortedAnnouncements().map(announcement => (
-                                            <li key={announcement.id}>
-                                                <Link
-                                                    to={`/api/Announcements/${announcement.id}`}
-                                                    onClick={() => setSelectedAnnouncement(announcement)}
-                                                >
-                                                    <h3>{announcement.name}</h3>
-                                                </Link>
-                                                <p>Description: {announcement.description}</p>
-                                                <p>Condition: {announcement.condition}</p>
-                                                <p>Price: {announcement.price}</p>
-                                                <p>Date: {announcement.date}</p>
-                                                <p>State: {announcement.state}</p>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
-            </Router>
-        );
-    }
+                                <ul>
+                                    {getSortedAnnouncements().map(announcement => (
+                                        <li key={announcement.id}>
+                                            <Link
+                                                to={`/api/Announcements/${announcement.id}`}
+                                                onClick={() => setSelectedAnnouncement(announcement)}
+                                            >
+                                                <h3>{announcement.name}</h3>
+                                            </Link>
+                                            <p>Description: {announcement.description}</p>
+                                            <p>Condition: {announcement.condition}</p>
+                                            <p>Price: {announcement.price}</p>
+                                            <p>Date: {announcement.date}</p>
+                                            <p>State: {announcement.state}</p>
+                                            <button onClick={() => handleAddToCart(announcement)}>Dodaj do koszyka</button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        </Router>
+    );
+}
 
-    export default App;
+export { App as default, CartButton };
