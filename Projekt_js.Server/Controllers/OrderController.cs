@@ -47,18 +47,21 @@ namespace Projekt_js.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(OrderModel order)
         {
-            var client = new Client { Name = order.Name, LastName = order.LastName, Email = order.Email, PhoneNumber = order.PhoneNumber, ZipCode = order.ZipCode, City = order.City, Street = order.Street };
+            var client = new Client { Name = order.Name,Role="Client", LastName = order.LastName, Email = order.Email, PhoneNumber = order.PhoneNumber, ZipCode = order.ZipCode, City = order.City, Street = order.Street };
 		     _context.Clients.Add(client);
-			await _context.SaveChangesAsync();
-            var order2 = new Order { ClientId = client.Id, Date = DateTime.Now, SummaryPrice = 0 };
+			 await _context.SaveChangesAsync();
+			var order2 = new Order { ClientId = client.Id, Date = DateTime.Now, SummaryPrice = 0 };
             _context.Orders.Add(order2);
             await _context.SaveChangesAsync();
             double sumprice = 0;
-            foreach(Announcement item in order.Announcements)
+            foreach(int item in order.Announcements)
             {
-                sumprice += item.Price;
-                var connector = new OrderConnector { AnnoucementId = item.Id, OrderId = order2.Id };
-            }
+                var announ = await _context.Announcements.FindAsync(item);
+                sumprice += announ.Price;
+                var connector = new OrderConnector { AnnouncementId = announ.Id, OrderId = order2.Id };
+			     _context.OrderConnectors.Add(connector);
+				await _context.SaveChangesAsync();
+			}
             order2.SummaryPrice = sumprice;
 			_context.Entry(order2).State = EntityState.Modified;
             await _context.SaveChangesAsync();
