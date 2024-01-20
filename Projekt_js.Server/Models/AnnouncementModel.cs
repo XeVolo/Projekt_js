@@ -6,6 +6,7 @@ namespace Projekt_js.Server.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
+		public string PhotoUrl { get; set; }
 		public List<int> CategoryConnectors { get; set; }
 		public int Quantity { get; set; }
 		public int Price { get; set; }
