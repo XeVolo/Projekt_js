@@ -10,6 +10,7 @@ namespace Projekt_js.Server.Entities
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
+		public string PhotoUrl { get; set; }
 		public virtual ICollection<CategoryConnector> CategoryConnectors { get; set; }
 		public virtual ICollection<OrderConnector> OrderConnectors { get; set; }
 		public int Quantity { get; set; }
