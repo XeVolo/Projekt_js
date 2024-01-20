@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt_js.Server;
 using Projekt_js.Server.Entities;
+using Projekt_js.Server.Models;
 
 namespace Projekt_js.Server.Controllers
 {
@@ -44,9 +45,22 @@ namespace Projekt_js.Server.Controllers
         // POST: api/Order
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder(OrderModel order)
         {
-            _context.Orders.Add(order);
+            var client = new Client { Name = order.Name, LastName = order.LastName, Email = order.Email, PhoneNumber = order.PhoneNumber, ZipCode = order.ZipCode, City = order.City, Street = order.Street };
+		     _context.Clients.Add(client);
+			await _context.SaveChangesAsync();
+            var order2 = new Order { ClientId = client.Id, Date = DateTime.Now, SummaryPrice = 0 };
+            _context.Orders.Add(order2);
+            await _context.SaveChangesAsync();
+            double sumprice = 0;
+            foreach(Announcement item in order.Announcements)
+            {
+                sumprice += item.Price;
+                var connector = new OrderConnector { AnnoucementId = item.Id, OrderId = order2.Id };
+            }
+            order2.SummaryPrice = sumprice;
+			_context.Entry(order2).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return Ok();
