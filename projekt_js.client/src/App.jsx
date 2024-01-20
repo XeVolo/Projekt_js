@@ -30,7 +30,7 @@ function App() {
 
     const handleFilterBySubcategories = async () => {
         try {
-            const response = await fetch('api/Announcement/SearchByCategories', {   
+            const response = await fetch('api/Announcements/SearchByCategories', {   
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

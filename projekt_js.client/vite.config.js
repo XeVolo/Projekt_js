@@ -51,11 +51,15 @@ export default defineConfig({
                 target: 'http://localhost:5240',
                 secure: false
             },
-            '^/api/Announcement': {
+            '^/api/Announcements': {
                 target: 'http://localhost:5240',
                 secure: false
             },
             '^/api/SubCategory': {
+                target: 'http://localhost:5240',
+                secure: false
+            },
+            '^/api/Announcements/SearchByCategories': {
                 target: 'http://localhost:5240',
                 secure: false
             },
