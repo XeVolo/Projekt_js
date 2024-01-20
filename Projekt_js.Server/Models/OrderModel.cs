@@ -5,7 +5,7 @@ namespace Projekt_js.Server.Models
 	public class OrderModel
 	{
 		public int Id { get; set; }
-		public List<Announcement> Announcements { get; set; }
+		public List<int> Announcements { get; set; }
 		public string Name { get; set; }
 		public string LastName { get; set; }
 		public string Email { get; set; }
