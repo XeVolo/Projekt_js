@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CreateAnnouncement.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateAnnouncement = () => {
     const [announcementData, setAnnouncementData] = useState({
@@ -16,6 +17,8 @@ const CreateAnnouncement = () => {
     const [nameError, setNameError] = useState('');
     const [subcategories, setSubcategories] = useState([]);
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -35,19 +38,11 @@ const CreateAnnouncement = () => {
         try {
             const response = await fetch('api/SubCategory');
             const data = await response.json();
-                setSubcategories(data);
-            
-             
+            setSubcategories(data);
         } catch (error) {
             console.error('Error:', error);
         }
     };
-    console.log(subcategories);
-    {
-        subcategories.map(subcategory => (
-            <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
-        ))
-    }
 
     useEffect(() => {
         fetchSubcategories();
@@ -72,6 +67,7 @@ const CreateAnnouncement = () => {
             if (response.ok) {
                 // Pomyślnie wysłano ogłoszenie na serwer
                 console.log('Announcement submitted successfully.');
+                navigate('/api/Announcements');
                 // Tutaj możesz dodać przekierowanie na inną stronę lub wykonać inne działania po wysłaniu ogłoszenia
             } else {
                 // Błąd podczas wysyłania ogłoszenia
