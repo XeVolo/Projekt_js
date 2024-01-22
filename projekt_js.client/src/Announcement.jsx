@@ -8,12 +8,17 @@ const Announcement = ({ announcement }) => {
     return (
         <div>
             <h2>{announcement.name}</h2>
-            <p>Zdjêcie: {announcement.photoURL}</p>
-            <p>Opis produktu: {announcement.description}</p>
+            <img id="annoucement-photo"
+                src={announcement.photoUrl}
+                alt={`Zdjecie ${announcement.name}`}
+                style={{ maxWidth: '125px', maxHeight: '250px' }}
+            />  
+            <div id="product-info">
+            <p>Cena: {announcement.price}zl</p>
             <p>Stan: {announcement.condition}</p>
-            <p>Cena: {announcement.price}</p>
             <p>Data dodania: {announcement.date}</p>
-
+            <p>Opis produktu: {announcement.description}</p>
+            </div>
         </div>
     );
 };

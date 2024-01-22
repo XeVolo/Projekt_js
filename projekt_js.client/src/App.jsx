@@ -91,6 +91,10 @@ function App() {
         }
     };
 
+    const handleBackButtonClick = () => {
+        window.location.href = '/index.html';
+    };
+
     return (
         <Router>
             <header>
@@ -145,26 +149,25 @@ function App() {
                             {selectedAnnouncement ? (
                                 <div>
                                     <Announcement announcement={selectedAnnouncement} />
-                                    <button onClick={() => setSelectedAnnouncement(null)}>Cofnij do strony glownej</button>
+                                    <button onClick={handleBackButtonClick}>Cofnij do strony glownej</button>
                                 </div>
                             ) : (
                                 <div>
                                     <h2>Nasze produkty</h2>
-
                                         <ul className="announcement-list">
-                                        {getSortedAnnouncements().map(announcement => (
+                                            {getSortedAnnouncements().map(announcement => (
                                             <li key={announcement.id}>
-                                                <Link
-                                                    to={`/api/Announcements/${announcement.id}`}
-                                                    onClick={() => setSelectedAnnouncement(announcement)}
-                                                >
-                                                    <h3>{announcement.name}</h3>
-                                                </Link>
-                                                <p>Zdjecie: {announcement.photoURL}</p>
-                                                <p>Opis: {announcement.description}</p>
-                                                <p>Stan: {announcement.condition}</p>
-                                                <p>Cena: {announcement.price}zl</p>
-                                                <p>Data: {announcement.date}</p>
+                                                    <h2>{announcement.name}</h2>
+                                                <Link to={`/api/Announcements/${announcement.id}`}
+                                                      onClick={() => setSelectedAnnouncement(announcement)}>
+                                                       <img
+                                                           src={announcement.photoUrl}
+                                                           alt={`Zdjecie ${announcement.name}`}
+                                                           style={{ maxWidth: '125px', maxHeight: '250px' }}
+                                                        />    
+                                                </Link>                                       
+                                                <p>Cena: {announcement.price}zl</p>                           
+                                                <button onClick={() => handleAddToCart(announcement)}>Dodaj do koszyka</button>
                                             </li>
                                         ))}
                                     </ul>
