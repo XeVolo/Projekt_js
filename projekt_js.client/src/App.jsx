@@ -288,6 +288,10 @@ function App() {
                             {selectedAnnouncement ? (
                                 <div>
                                     <Announcement announcement={selectedAnnouncement} />
+                                    <Link onClick={() => handleAddToCart(selectedAnnouncement)}>
+                                        <button>Dodaj do koszyka</button>
+                                    </Link>
+                                    <br/>
                                     <button onClick={() => handleBackButtonClick()}>Cofnij do strony glownej</button>
                                 </div>
                             ) : (
