@@ -190,9 +190,10 @@ function App() {
     return (
         <Router>
             <header>
+                <button style={{ margin: '5px', float: 'left' }}>Meskie</button>
+                <button style={{ margin: '5px', float: 'left' }}>Damskie</button>
                 <Link to="/" onClick={handleBackButtonClick}>
-                <h1>
-                
+                <h1>   
                     <span id="StoreName" style={{ cursor: 'pointer' }}>
                         <img src="/src/assets/logo.png" alt="Logo" />
                     </span>               
@@ -212,7 +213,7 @@ function App() {
                 </Routes>
                 <div className="grid-container">
                     <div className="narrow-column subcategory-container">
-                        <h2>Kategorie</h2>
+                        <h2>Kategorie</h2>                 
                         {subcategories.map(subcategory => (
                             <label key={subcategory.id}>
                                 <input
