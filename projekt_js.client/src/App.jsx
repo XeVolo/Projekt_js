@@ -57,6 +57,7 @@ function App() {
 
     const handleClearSubcategories = () => {
         populateAnnouncementData();
+        fetchSubcategories();
     };
 
     const handleFilterBySubcategories = async () => {
