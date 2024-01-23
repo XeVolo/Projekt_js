@@ -15,6 +15,8 @@ const Cart = ({ cartItems, announcements }) => {
             <h2>Koszyk</h2>
             {cartItems.length === 0 ? (
                 <p>Twoj koszyk jest pusty.</p>
+                
+
             ) : (
                 <div>
                     <ul>
@@ -36,7 +38,11 @@ const Cart = ({ cartItems, announcements }) => {
                     </ul>
                     <p>Suma cen: {calculateTotalPrice()} PLN</p>
                     <Link to="/Order">
-                        <button>Z³ó¿ zamówienie</button>
+                        <button>Zloz zamowienie</button>
+                    </Link>
+                    <br />
+                    <Link to="/">
+                        <button>Schowaj koszyk</button>
                     </Link>
                 </div>
             )}
