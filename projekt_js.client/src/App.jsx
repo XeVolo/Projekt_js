@@ -190,8 +190,12 @@ function App() {
     return (
         <Router>
             <header>
-                <button style={{ margin: '5px', float: 'left' }}>Meskie</button>
-                <button style={{ margin: '5px', float: 'left' }}>Damskie</button>
+                <Link to="/" onClick={handleFilterByCategories(10)}>
+                    <button style={{ margin: '5px', float: 'left' }}>Meskie</button>
+                </Link>
+                <Link to="/" onClick={handleFilterByCategories(11)}>
+                    <button style={{ margin: '5px', float: 'left' }}>Damskie</button>
+                </Link>
                 <Link to="/" onClick={handleBackButtonClick}>
                 <h1>   
                     <span id="StoreName" style={{ cursor: 'pointer' }}>
