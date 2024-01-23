@@ -26,7 +26,7 @@ const Cart = ({ cartItems, announcements, removeFromCart }) => {
                                             <div>
                                                 <p>Nazwa: {announcement.name}</p>
                                                 <p>Cena: {announcement.price}</p>
-                                                <button onClick={() => removeFromCart(announcement)}>Usuñ</button>
+                                                <button onClick={() => removeFromCart(itemId)}>Usun</button>
                                             </div>
                                         ) : (
                                             <p>ID: {itemId}</p>
@@ -37,7 +37,7 @@ const Cart = ({ cartItems, announcements, removeFromCart }) => {
                         </ul>
                     <p>Suma cen: {calculateTotalPrice()} PLN</p>
                     <Link to="/Order">
-                        <button>Z³ó¿ zamówienie</button>
+                        <button>Zloz zamowienie</button>
                     </Link>
                 </div>
             )}

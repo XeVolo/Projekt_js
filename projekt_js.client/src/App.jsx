@@ -34,7 +34,8 @@ function App() {
     useEffect(() => {
         populateAnnouncementData();
         fetchSubcategories();
-    }, []);
+        console.log('cartItems updated:', cartItems);
+    }, [cartItems]);
 
     const handleSubcategoryInputChange = (e) => {
         const clickedSubcategoryId = parseInt(e.target.value);
@@ -121,8 +122,17 @@ function App() {
 
     const removeFromCart = (itemId) => {
         console.log('Removing item with ID:', itemId);
-        const updatedCart = cartItems.filter((id) => id !== itemId);
-        setCartItems(updatedCart);
+
+        const index = cartItems.indexOf(itemId);
+        if (index !== -1) {
+            console.log('Index of item to remove:', index);
+
+            const updatedCart = [...cartItems];
+            updatedCart.splice(index, 1);
+
+            console.log('Updated cart after removal:', updatedCart);
+            setCartItems(updatedCart);
+        }
     };
 
     const handleSearch = async (searchTerm) => {      
