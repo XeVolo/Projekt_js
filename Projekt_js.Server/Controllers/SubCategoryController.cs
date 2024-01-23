@@ -66,6 +66,7 @@ namespace Projekt_js.Server.Controllers
 			var query = await _context.CategoryConnectors
                 .Where(xx=>xx.SubCategory.CategoryId == categoryId)
 				.Select(cc => cc.SubCategory)
+                .Distinct()
 				.ToListAsync();
 
 			if (query == null || query.Count == 0)

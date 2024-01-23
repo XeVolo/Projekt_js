@@ -77,36 +77,39 @@ function App() {
     };
 
     //jshafjkhdsfjhaksdjfhjksdaf
-    const handleFilterByCategories = (e) => {
+    const handleFilterByCategories = async (e) => {
         try {
-            const response = fetch('api/Announcements/SearchByCategories20', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(e),
-            });
-
-            const data = response.json();
-            setAnnouncements(data);
+            const announcementsData = await fetchData('api/Announcements/SearchByCategories20', e);
+            setAnnouncements(announcementsData);
         } catch (error) {
             console.error('B³¹d podczas filtrowania po kategorii', error);
         }
-        try {
-            const response = fetch('api/SubCategory/SearchByCategories30', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(e),
-            });
 
-            const data = response.json();
-            setSelectedSubcategories(data);
+        try {
+            const subcategoriesData = await fetchData('api/SubCategory/SearchByCategories30', e);
+            setSubcategories(subcategoriesData);
         } catch (error) {
             console.error('B³¹d podczas filtrowania podkategorii', error);
         }
     };
+
+    const fetchData = async (url, data) => {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            throw new Error(error);
+        }
+    };
+
 
     const handleAddToCart = (announcement) => {
         setCartItems([...cartItems, announcement.id]);
@@ -190,10 +193,10 @@ function App() {
     return (
         <Router>
             <header>
-                <Link to="/" value={10} onClick={handleFilterByCategories}>
+                <Link to="/" onClick={() => handleFilterByCategories(10)}>
                     <button style={{ margin: '5px', float: 'left' }}>Meskie</button>
                 </Link>
-                <Link to="/" value={11} onClick={handleFilterByCategories}>
+                <Link to="/" onClick={() => handleFilterByCategories(11)}>
                     <button style={{ margin: '5px', float: 'left' }}>Damskie</button>
                 </Link>
                 <Link to="/" onClick={handleBackButtonClick}>
