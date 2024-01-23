@@ -64,7 +64,7 @@ namespace Projekt_js.Server.Controllers
 				return BadRequest("Brak zaznaczonych kategorii.");
 			}
 			var query = await _context.CategoryConnectors
-                .Where(x=>x.SubCategory.Id==categoryId)
+                .Where(xx=>xx.SubCategory.CategoryId == categoryId)
 				.Select(cc => cc.SubCategory)
 				.ToListAsync();
 
