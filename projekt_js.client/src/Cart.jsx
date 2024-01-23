@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ cartItems, announcements }) => {
+const Cart = ({ cartItems, announcements, removeFromCart }) => {
     // Funkcja do zsumowania cen og³oszeñ w koszyku
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, itemId) => {
@@ -19,23 +19,24 @@ const Cart = ({ cartItems, announcements }) => {
 
             ) : (
                 <div>
-                    <ul>
-                        {cartItems.map((itemId) => {
-                            const announcement = announcements.find(a => a.id === itemId);
-                            return (
-                                <li key={itemId}>
-                                    {announcement ? (
-                                        <div>
-                                            <p>Nazwa: {announcement.name}</p>
-                                            <p>Cena: {announcement.price}</p>
-                                        </div>
-                                    ) : (
-                                        <p>ID: {itemId}</p>
-                                    )}
-                                </li>
-                            );
-                        })}
-                    </ul>
+                        <ul>
+                            {cartItems.map((itemId) => {
+                                const announcement = announcements.find((a) => a.id === itemId);
+                                return (
+                                    <li key={itemId}>
+                                        {announcement ? (
+                                            <div>
+                                                <p>Nazwa: {announcement.name}</p>
+                                                <p>Cena: {announcement.price}</p>
+                                                <button onClick={() => removeFromCart(itemId)}>Usun</button>
+                                            </div>
+                                        ) : (
+                                            <p>ID: {itemId}</p>
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ul>
                     <p>Suma cen: {calculateTotalPrice()} PLN</p>
                     <Link to="/Order">
                         <button>Zloz zamowienie</button>

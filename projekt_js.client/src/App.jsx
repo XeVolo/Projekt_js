@@ -34,7 +34,8 @@ function App() {
     useEffect(() => {
         populateAnnouncementData();
         fetchSubcategories();
-    }, []);
+        console.log('cartItems updated:', cartItems);
+    }, [cartItems]);
 
     const handleSubcategoryInputChange = (e) => {
         const clickedSubcategoryId = parseInt(e.target.value);
@@ -119,6 +120,21 @@ function App() {
         }
     };
 
+    const removeFromCart = (itemId) => {
+        console.log('Removing item with ID:', itemId);
+
+        const index = cartItems.indexOf(itemId);
+        if (index !== -1) {
+            console.log('Index of item to remove:', index);
+
+            const updatedCart = [...cartItems];
+            updatedCart.splice(index, 1);
+
+            console.log('Updated cart after removal:', updatedCart);
+            setCartItems(updatedCart);
+        }
+    };
+
     const handleSearch = async (searchTerm) => {      
         if (!searchTerm || searchTerm.trim() === '') {
             console.error('Puste wyszukiwanie.');
@@ -155,8 +171,11 @@ function App() {
                 <CreateAnnouncementButton />
                 <Routes>
                     <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
-                    <Route path="/Cart" element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}/>
-                    <Route path="/Order" element={<Order cartItems={cartItems} announcements={getSortedAnnouncements()} />}/>
+                    <Route
+                        path="/Cart"
+                        element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} removeFromCart={removeFromCart} />}
+                    />
+                    <Route path="/Order" element={<Order cartItems={cartItems} announcements={getSortedAnnouncements()} />} />
                 </Routes>
                 <div className="grid-container">
                     <div className="narrow-column subcategory-container">
