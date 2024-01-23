@@ -115,7 +115,7 @@ const Order = ({ cartItems, announcements }) => {
 
     return (
         <div>
-            <h2>Zamówienie</h2>
+            <h2>Zamowienie</h2>
             <OrderForm onSubmit={handleOrderSubmit} cartItems={cartItems} announcements={announcements} />
         </div>
     );
