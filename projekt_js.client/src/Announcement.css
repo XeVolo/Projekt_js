@@ -24,8 +24,6 @@ p {
     font-size: 20px;
 }
 #annoucement-photo {
-    width: auto; /* Dziêki temu zdjêcie bêdzie skalowaæ siê proporcjonalnie */
-    height: auto; /* Dziêki temu zdjêcie bêdzie skalowaæ siê proporcjonalnie */
     float: left;
     margin-right: 20px;
     margin-left: 100px;

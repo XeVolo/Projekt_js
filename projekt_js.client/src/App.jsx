@@ -10,8 +10,10 @@ import Order from './Order';
 
 function CartButton() {
     return (
-        <Link to="/cart">
-            <button>Przejdz do koszyka</button>
+        <Link to="/cart" style={{ float: 'right', marginRight: '50px' }}>
+            <button>
+                <img src="/src/assets/shopping-cart.png" alt="Koszyk" style={{ width: '20px', height: '20px', marginRight: '5px'}} />
+            </button>
         </Link>
     );
 }
@@ -95,10 +97,17 @@ function App() {
         window.location.href = '/index.html';
     };
 
+
+
     return (
         <Router>
             <header>
-                <h1 id="StoreName">Lumpeks pumpeks</h1>
+                <h1>
+                    <span id="StoreName" onClick={handleBackButtonClick} style={{ cursor: 'pointer' }}>
+                        <img src="/src/assets/logo.png" alt="Koszyk" />
+                    </span>               
+                    <CartButton />
+                </h1>
             </header>
             <div>                            
                 <CreateAnnouncementButton />
@@ -140,7 +149,7 @@ function App() {
                     <Route path="/Order" element={<Order />} />
                 </Routes>
 
-                <CartButton />
+                
 
                 {announcements === undefined ? (
                     <p><em>Ladowanie produktow</em></p>
