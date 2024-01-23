@@ -55,8 +55,29 @@ namespace Projekt_js.Server.Controllers
             return Ok();
         }
 
-        // DELETE: api/SubCategory/5
-        [HttpDelete("{id}")]
+		[HttpPost]
+		[Route("SearchByCategories30")]
+		public async Task<ActionResult<IEnumerable<SubCategory>>> SearchByCategories30([FromBody]int categoryId)
+		{
+			if (categoryId == null)
+			{
+				return BadRequest("Brak zaznaczonych kategorii.");
+			}
+			var query = await _context.CategoryConnectors
+                .Where(x=>x.SubCategory.Id==categoryId)
+				.Select(cc => cc.SubCategory)
+				.ToListAsync();
+
+			if (query == null || query.Count == 0)
+			{
+				return NotFound("Brak podkategorii w wybranych kategoriach.");
+			}
+
+			return query;
+		}
+
+		// DELETE: api/SubCategory/5
+		[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubCategory(int id)
         {
             var subCategory = await _context.SubCategories.FindAsync(id);

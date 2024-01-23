@@ -76,6 +76,38 @@ function App() {
         }
     };
 
+    //jshafjkhdsfjhaksdjfhjksdaf
+    const handleFilterByCategories = async (e) => {
+        try {
+            const response = await fetch('api/Announcements/SearchByCategories20', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(e),
+            });
+
+            const data = await response.json();
+            setAnnouncements(data);
+        } catch (error) {
+            console.error('B³¹d podczas filtrowania po kategorii', error);
+        }
+        try {
+            const response = await fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(e),
+            });
+
+            const data = await response.json();
+            setSelectedSubcategories(data);
+        } catch (error) {
+            console.error('B³¹d podczas filtrowania podkategorii', error);
+        }
+    };
+
     const handleAddToCart = (announcement) => {
         setCartItems([...cartItems, announcement.id]);
     };
