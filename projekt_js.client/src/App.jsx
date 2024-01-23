@@ -143,8 +143,7 @@ function App() {
         <Router>
             <header>
                 <Link to="/">
-                <h1>
-                
+                <h1>             
                     <span id="StoreName" style={{ cursor: 'pointer' }}>
                         <img src="/src/assets/logo.png" alt="Logo" />
                     </span>               
