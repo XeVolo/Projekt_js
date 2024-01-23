@@ -101,7 +101,7 @@ namespace Projekt_js.Server.Controllers
 		[HttpPost]
 		public async Task<ActionResult<AnnouncementModel>> PostAnnouncementModel(AnnouncementModel announcementModel)
 		{
-			Announcement announcement = new Announcement { Name = announcementModel.Name,PhotoUrl=announcementModel.PhotoUrl, Quantity = announcementModel.Quantity, Price = announcementModel.Price, Date = DateTime.Now, Description = announcementModel.Description, Condition = announcementModel.Condition, State = "Aktywne" };
+			Announcement announcement = new Announcement { Name = announcementModel.Name,PhotoUrl=announcementModel.PhotoUrl, Quantity = announcementModel.Quantity, Price = announcementModel.Price,Size=announcementModel.Size, Date = DateTime.Now, Description = announcementModel.Description, Condition = announcementModel.Condition, State = "Aktywne" };
 			_context.Announcements.Add(announcement);
 			await _context.SaveChangesAsync();
             foreach(int item in announcementModel.CategoryConnectors)

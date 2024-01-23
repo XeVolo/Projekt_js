@@ -10,6 +10,7 @@ const CreateAnnouncement = () => {
         categoryConnectors: [],
         quantity: 0,
         price: 0,
+        size: '',
         description: '',
         condition: '',
         state: '',
@@ -83,7 +84,7 @@ const CreateAnnouncement = () => {
         <div>
             <h2>Create New Announcement</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name:</label>
+                <label htmlFor="name">Nazwa:</label>
                 <input type="text" name="name" value={announcementData.name} onChange={handleInputChange} />
                 <span style={{ color: 'red' }}>{nameError}</span>
 
@@ -95,20 +96,20 @@ const CreateAnnouncement = () => {
                     ))}
                 </select>
 
-                <label htmlFor="quantity">Quantity:</label>
+                <label htmlFor="quantity">Ilość:</label>
                 <input type="number" name="quantity" value={announcementData.quantity} onChange={handleInputChange} />
 
-                <label htmlFor="price">Price:</label>
+                <label htmlFor="price">Cena:</label>
                 <input type="number" name="price" value={announcementData.price} onChange={handleInputChange} />
 
-                <label htmlFor="description">Description:</label>
+                <label htmlFor="size">Rozmiar:</label>
+                <input name="size" value={announcementData.size} onChange={handleInputChange} />
+
+                <label htmlFor="description">Opis:</label>
                 <textarea name="description" value={announcementData.description} onChange={handleInputChange} />
 
-                <label htmlFor="condition">Condition:</label>
+                <label htmlFor="condition">Stan:</label>
                 <input type="text" name="condition" value={announcementData.condition} onChange={handleInputChange} />
-
-                <label htmlFor="state">State:</label>
-                <input type="text" name="state" value={announcementData.state} onChange={handleInputChange} />
 
                 <label htmlFor="photoURL">Photo URL:</label>
                 <input type="text" name="photoURL" value={announcementData.photoURL} onChange={handleInputChange} />

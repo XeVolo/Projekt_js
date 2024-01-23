@@ -174,8 +174,10 @@ function App() {
                                                            alt={`Zdjecie ${announcement.name}`}
                                                            style={{ maxWidth: '125px', maxHeight: '250px' }}
                                                         />    
-                                                </Link>                                       
-                                                <p>Cena: {announcement.price}zl</p>                           
+                                                    </Link>    
+                                                    <p>Rozmiar: { announcement.size}</p>
+                                                    <p>Cena: {announcement.price}zl</p>  
+                                                
                                                 <button onClick={() => handleAddToCart(announcement)}>Dodaj do koszyka</button>
                                             </li>
                                         ))}
