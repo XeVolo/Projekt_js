@@ -27,7 +27,7 @@ const Cart = ({ cartItems, announcements }) => {
                                     {announcement ? (
                                         <div>
                                             <p>Nazwa: {announcement.name}</p>
-                                            <p>ID: {itemId}</p>
+                                            <p>Cena: {announcement.price}</p>
                                         </div>
                                     ) : (
                                         <p>ID: {itemId}</p>
