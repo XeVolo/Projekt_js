@@ -117,7 +117,7 @@ function App() {
     };
 
     const handleBackButtonClick = () => {
-        window.location.href = '/index.html';
+        window.location.href = '/';
     };
 
     const handleEnterPress = (event) => {
