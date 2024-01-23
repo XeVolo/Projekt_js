@@ -25,7 +25,7 @@ const Cart = ({ cartItems, announcements }) => {
                                     {announcement ? (
                                         <div>
                                             <p>Nazwa: {announcement.name}</p>
-                                            <p>ID: {itemId}</p>
+                                            <p>Cena: {announcement.price}</p>
                                         </div>
                                     ) : (
                                         <p>ID: {itemId}</p>
@@ -36,7 +36,7 @@ const Cart = ({ cartItems, announcements }) => {
                     </ul>
                     <p>Suma cen: {calculateTotalPrice()} PLN</p>
                     <Link to="/Order">
-                        <button>Z³ó¿ zamówienie</button>
+                        <button>Zloz zamowienie</button>
                     </Link>
                 </div>
             )}
