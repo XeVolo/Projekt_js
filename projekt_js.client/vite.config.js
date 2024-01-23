@@ -67,6 +67,14 @@ export default defineConfig({
                 target: 'http://localhost:5240',
                 secure: false
             },
+            '^/api/Announcements/SearchByCategories20': {
+                target: 'http://localhost:5240',
+                secure: false
+            },
+            '^/api/SubCategory/SearchByCategories30': {
+                target: 'http://localhost:5240',
+                secure: false
+            },
 
             '^/weatherforecast': {
                 target: 'http://localhost:5240',

@@ -93,7 +93,7 @@ function App() {
             console.error('B³¹d podczas filtrowania po kategorii', error);
         }
         try {
-            const response = await fetch('', {
+            const response = await fetch('api/SubCategory/SearchByCategories30', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
