@@ -35,7 +35,7 @@ function App() {
         populateAnnouncementData();
         fetchSubcategories();
         console.log('cartItems updated:', cartItems);
-    }, [cartItems]);
+    }, []);
 
     const handleSubcategoryInputChange = (e) => {
         const clickedSubcategoryId = parseInt(e.target.value);
@@ -212,7 +212,7 @@ function App() {
                 <Link to="/" onClick={() => handleFilterByCategories(11)}>
                     <button style={{ margin: '5px', float: 'left' }}>Damskie</button>
                 </Link>
-                <Link to="/" onClick={handleBackButtonClick}>
+                <Link to="/" onClick={()=>handleBackButtonClick()}>
                 <h1>   
                     <span id="StoreName" style={{ cursor: 'pointer' }}>
                         <img src="/src/assets/logo.png" alt="Logo" />
@@ -288,7 +288,7 @@ function App() {
                             {selectedAnnouncement ? (
                                 <div>
                                     <Announcement announcement={selectedAnnouncement} />
-                                    <button onClick={handleBackButtonClick}>Cofnij do strony glownej</button>
+                                    <button onClick={() => handleBackButtonClick()}>Cofnij do strony glownej</button>
                                 </div>
                             ) : (
                                 <div>
@@ -306,8 +306,9 @@ function App() {
                                                     </Link>    
                                                     <p>Rozmiar: { announcement.size}</p>
                                                     <p>Cena: {announcement.price}zl</p>  
-                                                
-                                                <button onClick={() => handleAddToCart(announcement)}>Dodaj do koszyka</button>
+                                                    <Link onClick={() => handleAddToCart(announcement)}>
+                                                    <button>Dodaj do koszyka</button>
+                                                    </Link>
                                             </li>
                                         ))}
                                     </ul>
