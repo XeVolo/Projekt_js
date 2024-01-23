@@ -110,7 +110,7 @@ function App() {
     };
 
     const handleBackButtonClick = () => {
-        window.location.href = '/';
+        setSelectedAnnouncement(null);
     };
 
     const handleEnterPress = (event) => {
@@ -142,7 +142,7 @@ function App() {
     return (
         <Router>
             <header>
-                <Link to="/">
+                <Link to="/" onClick={handleBackButtonClick}>
                 <h1>
                 
                     <span id="StoreName" style={{ cursor: 'pointer' }}>
@@ -228,8 +228,7 @@ function App() {
                                             {getSortedAnnouncements().map(announcement => (
                                             <li key={announcement.id}>
                                                     <h2>{announcement.name}</h2>
-                                                <Link to={`/api/Announcements/${announcement.id}`}
-                                                      onClick={() => setSelectedAnnouncement(announcement)}>
+                                                      <Link onClick={() => setSelectedAnnouncement(announcement)}>
                                                        <img
                                                            src={announcement.photoUrl}
                                                            alt={`Zdjecie ${announcement.name}`}
