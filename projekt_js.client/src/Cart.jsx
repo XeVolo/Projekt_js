@@ -14,7 +14,7 @@ const Cart = ({ cartItems, announcements }) => {
         <div>
             <h2>Koszyk</h2>
             {cartItems.length === 0 ? (
-                <p>Twój koszyk jest pusty.</p>
+                <p>Twoj koszyk jest pusty.</p>
             ) : (
                 <div>
                     <ul>

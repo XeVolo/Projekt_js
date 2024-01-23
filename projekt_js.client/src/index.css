@@ -23,6 +23,12 @@ h1 {
   padding: 20px;
 }
 
+.regular-column{
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   flex-direction: column;
+}
 .narrow-column, .regular-column {
     background-color: #e7e7e7;
     padding: 20px;

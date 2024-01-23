@@ -26,5 +26,5 @@ ul {
 
 li {
     break-inside: avoid-column;
-    margin-bottom: 20px; /* Dodaj dowolne odstępy między elementami, aby było czytelniej */
+    margin-bottom: 20px; 
 }

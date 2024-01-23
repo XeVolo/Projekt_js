@@ -25,11 +25,10 @@ function App() {
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
     const [subcategories, setSubcategories] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        // Pobierz og³oszenia
         populateAnnouncementData();
-        // Pobierz dostêpne podkategorie
         fetchSubcategories();
     }, []);
 
@@ -97,20 +96,52 @@ function App() {
         window.location.href = '/index.html';
     };
 
+    const handleEnterPress = (event) => {
+        if (event.key === 'Enter') {
+            handleSearch(searchTerm);
+        }
+    };
 
+    const handleSearch = async (searchTerm) => {      
+        if (!searchTerm || searchTerm.trim() === '') {
+            console.error('Puste wyszukiwanie.');
+            return;
+        }
+        try {
+            const response = await fetch(`api/Announcements/SearchByName?searchTerm=${encodeURIComponent(searchTerm)}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const data = await response.json();
+            setAnnouncements(data);
+        } catch (error) {
+            console.error('B³¹d podczas wyszukiwania', error);
+        }
+    };
 
     return (
         <Router>
             <header>
                 <h1>
                     <span id="StoreName" onClick={handleBackButtonClick} style={{ cursor: 'pointer' }}>
-                        <img src="/src/assets/logo.png" alt="Koszyk" />
+                        <img src="/src/assets/logo.png" alt="Logo" />
                     </span>               
                     <CartButton />
                 </h1>
             </header>
             <div>                            
                 <CreateAnnouncementButton />
+                <Routes>
+                    <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
+                    <Route
+                        path="/Cart"
+                        element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}
+                    />
+                    <Route path="/Order" element={<Order />} />
+                </Routes>
                 <div className="grid-container">
                     <div className="narrow-column subcategory-container">
                         <h2>Kategorie</h2>
@@ -125,8 +156,21 @@ function App() {
                         </div>
                     </div>
 
-                    <div className="regular-column subcategory-container">
-                        {/* Kolumna 2 - Analogiczny kod jak dla pierwszej kolumny */}
+                    <div className="regular-column">
+                        <h2 style={{ display: 'inline-block' }}>Wyszukaj</h2> <br />
+                        <input
+                            type="text"
+                            placeholder="Wyszukaj ogloszenia..."
+                            value={searchTerm}
+                            onChange={(event) => setSearchTerm(event.target.value)}
+                            onKeyPress={handleEnterPress}
+                            style={{
+                                width: '80%',
+                                padding: '10px',
+                                borderRadius: '5px',
+                                border: '1px solid #ccc', 
+                            }}
+                        />
                     </div>
 
                     <div className="narrow-column subcategory-container">
@@ -140,14 +184,7 @@ function App() {
 
                 </div>                     
 
-                <Routes>
-                    <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
-                    <Route
-                        path="/Cart"
-                        element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}
-                    />
-                    <Route path="/Order" element={<Order />} />
-                </Routes>
+               
 
                 
 
