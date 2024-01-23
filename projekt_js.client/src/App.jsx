@@ -117,7 +117,7 @@ function App() {
     };
 
     const handleBackButtonClick = () => {
-        window.location.href = '/index.html';
+        window.location.href = '/';
     };
 
     const handleEnterPress = (event) => {
@@ -160,14 +160,8 @@ function App() {
                 <CreateAnnouncementButton />
                 <Routes>
                     <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
-                    <Route
-                        path="/Cart"
-                        element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}
-                    />
-                    <Route
-                        path="/Order"
-                        element={<Order cartItems={cartItems} announcements={getSortedAnnouncements()} />}
-                    />
+                    <Route path="/Cart" element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}/>
+                    <Route path="/Order" element={<Order cartItems={cartItems} announcements={getSortedAnnouncements()} />}/>
                 </Routes>
                 <div className="grid-container">
                     <div className="narrow-column subcategory-container">
