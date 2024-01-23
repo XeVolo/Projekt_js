@@ -124,12 +124,25 @@ function App() {
             console.error('B³¹d podczas pobierania og³oszeñ', error);
         }
     };
+    const mapSubcategoriesWithGender = (subcategoriesData) => {
+        const mappedSubcategories = subcategoriesData.map(subcategory => {
+            if (subcategory.categoryId === 10) {
+                return { ...subcategory, name: `${subcategory.name} Meskie` };
+            } else if (subcategory.categoryId === 11) {
+                return { ...subcategory, name: `${subcategory.name} Damskie` };
+            } else {
+                return subcategory;
+            }
+        });
 
+        return mappedSubcategories;
+    };
     const fetchSubcategories = async () => {
         try {
             const response = await fetch('api/SubCategory');
             const data = await response.json();
-            setSubcategories(data);
+            const mappedSubcategories = mapSubcategoriesWithGender(data);
+            setSubcategories(mappedSubcategories);
         } catch (error) {
             console.error('B³¹d podczas pobierania podkategorii', error);
         }
