@@ -77,9 +77,9 @@ function App() {
     };
 
     //jshafjkhdsfjhaksdjfhjksdaf
-    const handleFilterByCategories = async (e) => {
+    const handleFilterByCategories = (e) => {
         try {
-            const response = await fetch('api/Announcements/SearchByCategories20', {
+            const response = fetch('api/Announcements/SearchByCategories20', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,13 +87,13 @@ function App() {
                 body: JSON.stringify(e),
             });
 
-            const data = await response.json();
+            const data = response.json();
             setAnnouncements(data);
         } catch (error) {
             console.error('B³¹d podczas filtrowania po kategorii', error);
         }
         try {
-            const response = await fetch('api/SubCategory/SearchByCategories30', {
+            const response = fetch('api/SubCategory/SearchByCategories30', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ function App() {
                 body: JSON.stringify(e),
             });
 
-            const data = await response.json();
+            const data = response.json();
             setSelectedSubcategories(data);
         } catch (error) {
             console.error('B³¹d podczas filtrowania podkategorii', error);
