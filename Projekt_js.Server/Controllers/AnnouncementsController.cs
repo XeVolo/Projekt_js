@@ -42,6 +42,25 @@ namespace Projekt_js.Server.Controllers
 
             return announcement;
         }
+        [HttpGet]
+        [Route("SearchByName")]
+        public async Task<ActionResult<IEnumerable<Announcement>>> SearchAnnouncementsByName([FromQuery]string searchTerm)
+        {
+            var matchingAnnouncements = await _context.Announcements
+                .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()))
+                .ToListAsync();
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return matchingAnnouncements;
+            }
+
+            if (matchingAnnouncements == null || matchingAnnouncements.Count == 0)
+            {
+                return NotFound("Brak ogłoszeń pasujących do podanego terminu wyszukiwania.");
+            }
+
+            return matchingAnnouncements;
+        }
 
         [HttpPost]
         [Route("SearchByCategories")]
