@@ -12,13 +12,6 @@ import ReactDOM from 'react-dom';
 
 Modal.setAppElement('#root'); // Ustaw element g³ówny (zmieñ '#root' na odpowiedni selektor dla Twojej aplikacji)
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    document.getElementById('root')
-);
-
 function CartButton() {
     return (
         <Link to="/cart" style={{ float: 'right', marginRight: '50px' }}>
@@ -155,12 +148,15 @@ function App() {
     return (
         <Router>
             <header>
+                <Link to="/">
                 <h1>
-                    <span id="StoreName" onClick={handleBackButtonClick} style={{ cursor: 'pointer' }}>
+                
+                    <span id="StoreName" style={{ cursor: 'pointer' }}>
                         <img src="/src/assets/logo.png" alt="Logo" />
                     </span>               
                     <CartButton />
                 </h1>
+                </Link>
             </header>
             <div>                            
                 <CreateAnnouncementButton />
