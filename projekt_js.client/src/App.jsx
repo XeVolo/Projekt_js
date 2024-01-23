@@ -33,8 +33,21 @@ function App() {
     }, []);
 
     const handleSubcategoryInputChange = (e) => {
-        const selectedIds = Array.from(e.target.selectedOptions, option => parseInt(option.value));
-        setSelectedSubcategories(selectedIds);
+        const clickedSubcategoryId = parseInt(e.target.value);
+        const updatedSubcategories = [...selectedSubcategories];
+
+        if (e.target.checked) {
+            
+            updatedSubcategories.push(clickedSubcategoryId);
+        } else {
+            
+            const index = updatedSubcategories.indexOf(clickedSubcategoryId);
+            if (index !== -1) {
+                updatedSubcategories.splice(index, 1);
+            }
+        }
+
+        setSelectedSubcategories(updatedSubcategories);
     };
 
     const handleClearSubcategories = () => {
@@ -145,11 +158,18 @@ function App() {
                 <div className="grid-container">
                     <div className="narrow-column subcategory-container">
                         <h2>Kategorie</h2>
-                        <select id="subcategorySelect" multiple value={selectedSubcategories} onChange={handleSubcategoryInputChange}>
-                            {subcategories.map(subcategory => (
-                                <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
-                            ))}
-                        </select>
+                        {subcategories.map(subcategory => (
+                            <label key={subcategory.id}>
+                                <input
+                                    type="checkbox"
+                                    id={`subcategoryCheckbox_${subcategory.id}`}
+                                    value={subcategory.id}
+                                    checked={selectedSubcategories.includes(subcategory.id)}
+                                    onChange={handleSubcategoryInputChange}
+                                />
+                                {subcategory.name}
+                            </label>
+                        ))}
                         <div className="button-container">
                             <button onClick={handleFilterBySubcategories}>Filtruj</button>
                             <button onClick={handleClearSubcategories}>Wyczysc filtry</button>
