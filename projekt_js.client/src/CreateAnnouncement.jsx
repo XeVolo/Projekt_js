@@ -22,7 +22,6 @@ const CreateAnnouncement = () => {
     const [sizeError, setSizeError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
     const [conditionError, setConditionError] = useState('');
-    const [stateError, setStateError] = useState('');
     const [photoURLError, setPhotoURLError] = useState('');
     const [subcategories, setSubcategories] = useState([]);
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
@@ -96,13 +95,6 @@ const CreateAnnouncement = () => {
             valid = false;
         } else {
             setConditionError('');
-        }
-
-        if (!announcementData.state.trim()) {
-            setStateError('State nie może być pusty');
-            valid = false;
-        } else {
-            setStateError('');
         }
 
         if (!announcementData.photoURL.trim()) {
@@ -220,10 +212,6 @@ const CreateAnnouncement = () => {
                 <label htmlFor="condition">Stan:</label>
                 <input type="text" name="condition" value={announcementData.condition} onChange={handleInputChange} />
                 <span style={{ color: 'red' }}>{conditionError}</span>
-
-                <label htmlFor="state">State:</label>
-                <input type="text" name="state" value={announcementData.state} onChange={handleInputChange} />
-                <span style={{ color: 'red' }}>{stateError}</span>
 
                 <label htmlFor="photoURL">Photo URL:</label>
                 <input type="text" name="photoURL" value={announcementData.photoURL} onChange={handleInputChange} />
