@@ -190,10 +190,10 @@ function App() {
     return (
         <Router>
             <header>
-                <Link to="/" onClick={handleFilterByCategories(10)}>
+                <Link to="/" value={10} onClick={handleFilterByCategories}>
                     <button style={{ margin: '5px', float: 'left' }}>Meskie</button>
                 </Link>
-                <Link to="/" onClick={handleFilterByCategories(11)}>
+                <Link to="/" value={11} onClick={handleFilterByCategories}>
                     <button style={{ margin: '5px', float: 'left' }}>Damskie</button>
                 </Link>
                 <Link to="/" onClick={handleBackButtonClick}>
