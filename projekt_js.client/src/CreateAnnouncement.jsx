@@ -1,8 +1,8 @@
-﻿/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CreateAnnouncement.css';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 const CreateAnnouncement = () => {
     const [announcementData, setAnnouncementData] = useState({
@@ -19,6 +19,8 @@ const CreateAnnouncement = () => {
     const [nameError, setNameError] = useState('');
     const [subcategories, setSubcategories] = useState([]);
     const [selectedSubcategories, setSelectedSubcategories] = useState([]);
+    const [announcementSubmitted, setAnnouncementSubmitted] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -48,7 +50,7 @@ const CreateAnnouncement = () => {
 
     useEffect(() => {
         fetchSubcategories();
-    }, []); // Fetch subcategories when the component mounts
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,12 +69,10 @@ const CreateAnnouncement = () => {
             });
 
             if (response.ok) {
-                // Pomyślnie wysłano ogłoszenie na serwer
                 console.log('Announcement submitted successfully.');
-                navigate('/api/Announcements');
-                // Tutaj możesz dodać przekierowanie na inną stronę lub wykonać inne działania po wysłaniu ogłoszenia
+                setAnnouncementSubmitted(true);
+                openModal();
             } else {
-                // Błąd podczas wysyłania ogłoszenia
                 console.error('Failed to submit announcement.');
             }
         } catch (error) {
@@ -80,9 +80,31 @@ const CreateAnnouncement = () => {
         }
     };
 
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setAnnouncementSubmitted(false);
+        navigate('/api/Announcements');
+    };
+
     return (
         <div>
             <h2>Create New Announcement</h2>
+            {announcementSubmitted && (
+                <Modal
+                    isOpen={isModalOpen}
+                    onRequestClose={closeModal}
+                    contentLabel="Announcement Submitted"
+                >
+                    <div>
+                        <p>Dodano ogłoszenie!</p>
+                        <button onClick={closeModal}>OK</button>
+                    </div>
+                </Modal>
+            )}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Nazwa:</label>
                 <input type="text" name="name" value={announcementData.name} onChange={handleInputChange} />

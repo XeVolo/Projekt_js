@@ -7,6 +7,17 @@ import CreateAnnouncementButton from './CreateAnnouncementButton';
 import './App.css';
 import Cart from './Cart';
 import Order from './Order';
+import Modal from 'react-modal';
+import ReactDOM from 'react-dom';
+
+Modal.setAppElement('#root'); // Ustaw element g³ówny (zmieñ '#root' na odpowiedni selektor dla Twojej aplikacji)
+
+ReactDOM.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('root')
+);
 
 function CartButton() {
     return (
@@ -137,7 +148,10 @@ function App() {
                         path="/Cart"
                         element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} />}
                     />
-                    <Route path="/Order" element={<Order />} />
+                    <Route
+                        path="/Order"
+                        element={<Order cartItems={cartItems} announcements={getSortedAnnouncements()} />}
+                        />
                 </Routes>
 
                 <CartButton />
