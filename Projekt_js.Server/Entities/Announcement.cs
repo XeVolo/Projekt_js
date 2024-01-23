@@ -15,6 +15,7 @@ namespace Projekt_js.Server.Entities
 		public virtual ICollection<OrderConnector> OrderConnectors { get; set; }
 		public int Quantity { get; set; }
 		public double Price { get; set; }
+		public string Size { get; set; }
 		public DateTime Date { get; set; }
 		public string Description { get; set; }
 		public string Condition { get; set; }
