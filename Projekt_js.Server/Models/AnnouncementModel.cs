@@ -9,7 +9,7 @@ namespace Projekt_js.Server.Models
 		public string PhotoUrl { get; set; }
 		public List<int> CategoryConnectors { get; set; }
 		public int Quantity { get; set; }
-		public int Price { get; set; }
+		public double Price { get; set; }
 		public string Size { get; set; }
 		public string Description { get; set; }
 		public string Condition { get; set; }
