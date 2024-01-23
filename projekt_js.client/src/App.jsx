@@ -222,13 +222,10 @@ function App() {
                 </Link>
             </header>
             <div>                            
-                <CreateAnnouncementButton />
+                {/*<CreateAnnouncementButton />*/}
                 <Routes>
-                    <Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />
-                    <Route
-                        path="/Cart"
-                        element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} removeFromCart={removeFromCart} />}
-                    />
+                    {/*<Route path="/CreateAnnouncement" element={<CreateAnnouncement />} />*/}
+                    <Route path="/Cart" element={<Cart cartItems={cartItems} announcements={getSortedAnnouncements()} removeFromCart={removeFromCart} />}/>
                     <Route path="/Order" element={<Order cartItems={cartItems} announcements={getSortedAnnouncements()} />} />
                 </Routes>
                 <div className="grid-container">
