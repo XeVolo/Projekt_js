@@ -35,6 +35,23 @@ const CreateAnnouncement = () => {
         const { name, value } = e.target;
         setAnnouncementData({ ...announcementData, [name]: value });
     };
+    const handleSubcategoryInputChange = (e) => {
+        const clickedSubcategoryId = parseInt(e.target.value);
+        const updatedSubcategories = [...selectedSubcategories];
+
+        if (e.target.checked) {
+
+            updatedSubcategories.push(clickedSubcategoryId);
+        } else {
+
+            const index = updatedSubcategories.indexOf(clickedSubcategoryId);
+            if (index !== -1) {
+                updatedSubcategories.splice(index, 1);
+            }
+        }
+
+        setSelectedSubcategories(updatedSubcategories);
+    };
 
     const validateForm = () => {
         let valid = true;
@@ -170,12 +187,19 @@ const CreateAnnouncement = () => {
                 <input type="text" name="name" value={announcementData.name} onChange={handleInputChange} />
                 <span style={{ color: 'red' }}>{nameError}</span>
 
-                <label htmlFor="subcategories">Select Subcategories:</label>
-                <select multiple onChange={(e) => setSelectedSubcategories(Array.from(e.target.selectedOptions, (option) => option.value))} value={selectedSubcategories}>
-                    {subcategories.map(subcategory => (
-                        <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
-                    ))}
-                </select>
+                <label htmlFor="subcategories">Wybierz kategorie:</label>
+                {subcategories.map(subcategory => (
+                    <label key={subcategory.id}>
+                        <input
+                            type="checkbox"
+                            id={`subcategoryCheckbox_${subcategory.id}`}
+                            value={subcategory.id}
+                            checked={selectedSubcategories.includes(subcategory.id)}
+                            onChange={handleSubcategoryInputChange}
+                        />
+                        {subcategory.name}
+                    </label>
+                ))}
 
                 <label htmlFor="quantity">Ilość:</label>
                 <input type="number" name="quantity" value={announcementData.quantity} onChange={handleInputChange} />
