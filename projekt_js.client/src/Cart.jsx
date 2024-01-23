@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ cartItems, announcements }) => {
+const Cart = ({ cartItems, announcements, removeFromCart }) => {
     // Funkcja do zsumowania cen og³oszeñ w koszyku
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, itemId) => {
@@ -14,29 +14,30 @@ const Cart = ({ cartItems, announcements }) => {
         <div>
             <h2>Koszyk</h2>
             {cartItems.length === 0 ? (
-                <p>Twoj koszyk jest pusty.</p>
+                <p>Twój koszyk jest pusty.</p>
             ) : (
                 <div>
-                    <ul>
-                        {cartItems.map((itemId) => {
-                            const announcement = announcements.find(a => a.id === itemId);
-                            return (
-                                <li key={itemId}>
-                                    {announcement ? (
-                                        <div>
-                                            <p>Nazwa: {announcement.name}</p>
-                                            <p>Cena: {announcement.price}</p>
-                                        </div>
-                                    ) : (
-                                        <p>ID: {itemId}</p>
-                                    )}
-                                </li>
-                            );
-                        })}
-                    </ul>
+                        <ul>
+                            {cartItems.map((itemId) => {
+                                const announcement = announcements.find((a) => a.id === itemId);
+                                return (
+                                    <li key={itemId}>
+                                        {announcement ? (
+                                            <div>
+                                                <p>Nazwa: {announcement.name}</p>
+                                                <p>Cena: {announcement.price}</p>
+                                                <button onClick={() => removeFromCart(announcement)}>Usuñ</button>
+                                            </div>
+                                        ) : (
+                                            <p>ID: {itemId}</p>
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ul>
                     <p>Suma cen: {calculateTotalPrice()} PLN</p>
                     <Link to="/Order">
-                        <button>Zloz zamowienie</button>
+                        <button>Z³ó¿ zamówienie</button>
                     </Link>
                 </div>
             )}
